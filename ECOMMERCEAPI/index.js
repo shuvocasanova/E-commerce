@@ -1,12 +1,21 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const userRoute = require("./routes/user")
+const authRoute = require("./routes/auth");
+
+dotenv.config()
 
 
 mongoose.connect(
-    "mongodb+srv://shuvo140:BzVl9i9aMCfozpjI@cluster0.bgfun.mongodb.net/ecommerce?retryWrites=true&w=majority"
+    process.env.MONGO_URL
 ).then(() => console.log("DB connection succesful")).catch((err)=>console.log(err));
 
-app.listen(5000, () => {
+app.use(express.json())
+app.use("/api/users", userRoute);
+app.use("/api/auth", authRoute);
+
+app.listen(process.env.PORT_NUMBER || 5000, () => {
     console.log("backend is running");
 });
