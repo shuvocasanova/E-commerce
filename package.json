@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "react-router-dom": "^6.3.0"
+  }
+}
